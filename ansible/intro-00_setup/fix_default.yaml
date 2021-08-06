@@ -1,0 +1,36 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Create default route template
+      cisco.dcnm.dcnm_template:
+        state: merged
+        config:
+          - name: update_default_route
+            description: "Default route for mgmt0"
+            tags: "defroute"
+            content: |
+              vrf context management
+                ip route 0.0.0.0/0 10.10.20.254
+
+
+    - name: Create default route policy and deploy to switches
+      cisco.dcnm.dcnm_policy:
+        fabric: "{{ fabric }}"
+        state: merged
+        deploy: true
+        config:
+          - name: update_default_route
+            create_additional_policy: false
+
+          - switch:
+              - ip: 10.10.20.171
+              - ip: 10.10.20.172
+              - ip: 10.10.20.173
+              - ip: 10.10.20.174
+              - ip: 10.10.20.175

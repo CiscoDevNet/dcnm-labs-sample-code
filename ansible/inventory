@@ -1,0 +1,25 @@
+[dcnm_controllers]
+dcnm ansible_host=10.10.20.18
+
+[dcnm_controllers:vars]
+ansible_user=admin
+ansible_ssh_pass=Cisco1234!
+ansible_connection=ansible.netcommon.httpapi
+ansible_network_os=cisco.dcnm.dcnm
+ansible_httpapi_validate_certs=False
+ansible_httpapi_use_ssl=True
+
+[nxos]
+spine1 ansible_host=10.10.20.171
+spine2 ansible_host=10.10.20.172
+leaf1 ansible_host=10.10.20.173
+leaf2 ansible_host=10.10.20.174
+leaf3 ansible_host=10.10.20.175
+
+[nxos:vars]
+ansible_network_os=cisco.nxos.nxos
+ansible_connection=ansible.netcommon.network_cli
+ansible_port=22
+ansible_user=cisco
+ansible_password=cisco12345
+ansible_become_method=enable
