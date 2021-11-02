@@ -1,0 +1,15 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Validate syslog template
+      cisco.dcnm.dcnm_rest:
+        method: POST
+        path: /rest/config/templates/validate
+        json_data: "##template properties \nname=syslog_server_ansible;\nuserDefined = true;\nsupportedPlatforms = All;\ntemplateType = POLICY;\ntemplateSubType = DEVICE;\ncontentType = TEMPLATE_CLI;\nimplements = implements;\n##\n##template content\nlogging server 10.10.20.100 5 use-vrf management\nlogging source-interface mgmt0##"
+

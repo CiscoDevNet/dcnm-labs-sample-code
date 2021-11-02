@@ -1,0 +1,13 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Query all VRFs deployed within the fabric
+      cisco.dcnm.dcnm_vrf:
+        fabric: "{{ fabric }}"
+        state: query

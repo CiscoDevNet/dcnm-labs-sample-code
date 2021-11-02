@@ -1,0 +1,16 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Create overlay network and VRF
+      cisco.dcnm.dcnm_network:
+        fabric: "{{ fabric }}"
+        state: query
+        config:
+        - net_name: Ansible_Network
+          vrf_name: Ansible_VRF

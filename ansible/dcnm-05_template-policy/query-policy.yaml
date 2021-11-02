@@ -1,0 +1,17 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Query policy to see if applied to device
+      cisco.dcnm.dcnm_policy:
+        fabric: "{{ fabric }}"
+        state: query
+        config:
+          - name: syslog_server_ansible
+          - switch:
+              - ip: 10.10.20.171

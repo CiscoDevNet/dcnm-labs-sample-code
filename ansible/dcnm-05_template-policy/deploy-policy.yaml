@@ -1,0 +1,19 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Create policy including required variables
+      cisco.dcnm.dcnm_policy:
+        fabric: "{{ fabric }}"
+        config:
+          - name: syslog_server_ansible
+            policy_vars:
+              IP: 10.10.20.105
+
+          - switch:
+              - ip: 10.10.20.171

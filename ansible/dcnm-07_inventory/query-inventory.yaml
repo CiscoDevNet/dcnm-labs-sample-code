@@ -1,0 +1,21 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Query fabric inventory
+      cisco.dcnm.dcnm_inventory:
+        fabric: "{{ fabric }}"
+        state: query
+      register: inventory
+    
+    - name: Print the parsed data
+      ansible.builtin.debug:
+        msg: "{{ item.displayValues }} "
+      loop: "{{ inventory.response }}"
+      loop_control:
+        index_var: index

@@ -1,0 +1,22 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Create VRFs inside of fabric
+      cisco.dcnm.dcnm_vrf:
+        fabric: "{{ fabric }}"
+        state: merged
+        config:
+        - vrf_name: Ansible_VRF
+          vrf_template: Default_VRF_Universal
+          vrf_extension_template: Default_VRF_Extension_Universal
+          attach:
+          - ip_address: 10.10.20.173
+            deploy: true
+          - ip_address: 10.10.20.174
+            deploy: true

@@ -1,0 +1,25 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Deploy VRF Lite
+      cisco.dcnm.dcnm_vrf:
+        fabric: "{{ fabric }}"
+        state: merged
+        config:
+        - vrf_name: Ansible_VRF
+          vrf_template: Default_VRF_Universal
+          vrf_extension_template: Default_VRF_Extension_Universal
+          attach:
+          - ip_address: 10.10.20.175
+            vrf_lite:
+              - peer_vrf: Ansible_VRF
+                interface: Ethernet1/3
+                ipv4_addr: 10.33.0.2/30
+                neighbor_ipv4: 10.33.0.1
+                dot1q: 33

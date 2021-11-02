@@ -1,0 +1,19 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+    - name: Create template policy using Ansible
+      cisco.dcnm.dcnm_template:
+        state: merged
+        config: 
+          - name: syslog_server
+            description: "Standard syslog server"
+            tags: "syslog"
+            content: |
+              logging server 10.10.20.105 5 use-vrf management
+              logging source-interface mgmt0

@@ -1,0 +1,21 @@
+---
+
+- hosts: dcnm_controllers
+  gather_facts: false
+
+  vars:
+    fabric: DevNet_Fabric
+
+  tasks:
+  - name: Add leaf4 to fabric
+    cisco.dcnm.dcnm_inventory:
+      fabric: "{{ fabric }}"
+      state: merged 
+      config:
+      - seed_ip: 10.10.20.176
+        auth_proto: MD5 
+        user_name: cisco
+        password: cisco12345
+        max_hops: 0
+        role: leaf
+        preserve_config: False 
