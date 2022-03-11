@@ -1,0 +1,1 @@
+"##template properties \nname=tf_syslog;\nuserDefined = true;\nsupportedPlatforms = [N9K];\ntemplateType = POLICY;\ntemplateSubType = DEVICE;\ncontentType = TEMPLATE_CLI;\nimplements = implements;\n##\n##template content\nlogging server 10.10.20.100 5 use-vrf management\nlogging source-interface mgmt0##"

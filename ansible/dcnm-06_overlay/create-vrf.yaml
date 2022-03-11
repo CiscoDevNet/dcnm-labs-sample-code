@@ -18,5 +18,3 @@
           attach:
           - ip_address: 10.10.20.173
             deploy: true
-          - ip_address: 10.10.20.174
-            deploy: true
